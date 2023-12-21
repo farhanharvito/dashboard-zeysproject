@@ -20,36 +20,28 @@ import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import Pagination from '../../components/Pagination';
 // import Constants from '../../constants';
-import { useStudent } from '../../services';
+import { useUser } from '../../services';
 import { useCustomToast } from '../../utils';
-import ModalFormStudent from './components/ModalFormStudent';
+import ModalFormUser from './components/ModalFormUser';
 
-const Student = () => {
-  const [searchParams] = useSearchParams();
-  const { studentList, deleteStudent } = useStudent();
+const User = () => {
+  const { userList, deleteUser } = useUser();
   const { showToastError, showToastSuccess } = useCustomToast();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [showFormPopup, setShowFormPopup] = useState(false);
 
   const [data, setData] = useState([]);
-  const [links, setLinks] = useState([]);
   const [selectedData, setSelectedData] = useState(null);
 
   useEffect(() => {
-    getListData(1, searchParams.get('search'));
-  }, [searchParams]);
+    getListData();
+  }, []);
 
-  const getListData = async (page, q) => {
+  const getListData = async () => {
     try {
-      const res = await studentList(page, q);
-      setData(res?.data);
-      setLinks(res?.links);
+      const res = await userList();
+      setData(res);
     } catch (e) {}
-  };
-
-  const handleEdit = item => {
-    setSelectedData(item);
-    setShowFormPopup(true);
   };
 
   const handleOpenDeletePopup = item => {
@@ -69,7 +61,7 @@ const Student = () => {
 
   const handleDelete = async () => {
     try {
-      const res = await deleteStudent(selectedData?.id);
+      const res = await deleteUser(selectedData?.id);
       setShowDeletePopup(false);
       showToastSuccess(res?.message);
       getListData();
@@ -77,16 +69,15 @@ const Student = () => {
       showToastError(e || e?.error);
     }
   };
-
   return (
     <Box>
       <TableContainer>
         <Flex justifyContent="space-between">
-          <Text color="gray.900" fontSize="24px" mb="24px">
-            Students List
+          <Text color="white" fontSize="24px" mb="24px">
+            User List
           </Text>
           <Button
-            text="ADD NEW STUDENT"
+            text="ADD NEW USER"
             isBggradient
             onClick={() => setShowFormPopup(true)}
           />
@@ -94,62 +85,34 @@ const Student = () => {
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th color="gray.500"></Th>
-              <Th color="gray.500">Name</Th>
-              <Th color="gray.500">Email</Th>
-              <Th color="gray.500">Phone</Th>
-              <Th color="gray.500">Enroll Number</Th>
-              <Th color="gray.500">Date of Admission</Th>
-              <Th color="gray.500"></Th>
+              <Th color={'white'}>Name</Th>
+              <Th color={'white'}>Email</Th>
+              <Th color={'white'}>Phone</Th>
+              <Th color={'white'}>Username</Th>
+              <Th color={'white'}></Th>
             </Tr>
           </Thead>
           <Tbody>
             {data.map(item => {
               return (
                 <Tr bgColor="gray.50" key={`payment-item-${item.id}`}>
-                  <Td>
-                    <Box
-                      width="65px"
-                      height="55px"
-                      overflow="hidden"
-                      borderRadius="8"
-                    >
-                      <Image
-                        src={window.location.origin + '/student_avatar.png'}
-                        width="100%"
-                        height="100%"
-                        objectFit="initial"
-                      />
-                    </Box>
+                  <Td fontSize="14px" color="black">
+                    {item?.name}
                   </Td>
-                  <Td fontSize="14px" color="gray.900">
-                    {item.name}
+                  <Td fontSize="14px" color="black">
+                    {item?.email}
                   </Td>
-                  <Td fontSize="14px" color="gray.900">
-                    {item.email}
+                  <Td fontSize="14px" color="black">
+                    {item?.phone}
                   </Td>
-                  <Td fontSize="14px" color="gray.900">
-                    {item.phoneNumber}
-                  </Td>
-                  <Td fontSize="14px" color="gray.900">
-                    {item.enrollNumber}
-                  </Td>
-                  <Td fontSize="14px" color="gray.900">
-                    {dayjs(item.admissionDate).format('DD-MMM, YYYY')}
+                  <Td fontSize="14px" color="black">
+                    {item?.username}
                   </Td>
                   <Td>
                     <Flex gap="10px">
                       <IconButton
-                        onClick={() => handleEdit(item)}
-                        size="xs"
-                        variant="ghost"
-                        aria-label="open menu"
-                        color="#667085"
-                        icon={<BiEdit />}
-                      />
-                      <IconButton
                         onClick={() => handleOpenDeletePopup(item)}
-                        size="xs"
+                        size="16px"
                         variant="ghost"
                         aria-label="open menu"
                         color="#667085"
@@ -163,10 +126,9 @@ const Student = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <Pagination links={links} onClick={getListData} />
       <Modal
         isOpen={showDeletePopup}
-        title="Delete Student"
+        title="Delete User"
         confirmButtonText="Delete"
         onClose={handleCloseDeletePopup}
         onConfirm={handleDelete}
@@ -175,7 +137,7 @@ const Student = () => {
           Are you sure?
         </Text>
       </Modal>
-      <ModalFormStudent
+      <ModalFormUser
         refresh={getListData}
         data={selectedData}
         isOpen={showFormPopup}
@@ -185,4 +147,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default User;

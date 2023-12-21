@@ -28,7 +28,7 @@ const Navbar = ({ onOpen, ...rest }) => {
       px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
-      bg={useColorModeValue('white', 'gray.900')}
+      bgColor={'#1B1B1B'}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}
     >
@@ -45,18 +45,7 @@ const Navbar = ({ onOpen, ...rest }) => {
         width="290px"
         height="32px"
       /> */}
-      <Box width="212px" mr="27px">
-        <InputGroup>
-          <Input
-            placeholder="Search"
-            name="search"
-            onChange={handleChangeText}
-          />
-          <InputRightElement>
-            <BiSearch color="#C4C4C4" />
-          </InputRightElement>
-        </InputGroup>
-      </Box>
+      <Box width="212px" mr="27px"></Box>
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton
           size="lg"

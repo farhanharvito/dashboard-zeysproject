@@ -27,35 +27,39 @@ const SignIn = () => {
     setIsLoading(true);
     try {
       const res = await signIn(form);
-      localStorage.setItem('accessToken', res.token);
       navigate('/admin/dashboard', { replace: true });
     } catch (e) {}
     setIsLoading(false);
   };
   return (
-    <Box
-      display="flex"
-      minH={'100vh'}
-      bgGradient="linear(to-r, #F94449 37.55%, #A62D31 184.78%)"
-    >
-      <Card w="628px" minH="516px" margin="auto" padding="40px">
+    <Box display="flex" minH={'100vh'} bgColor={'#1B1B1B'}>
+      <Card
+        w="628px"
+        minH="516px"
+        margin="auto"
+        padding="40px"
+        bgColor={'#1B1B1B'}
+        border="1px"
+        borderColor={'white'}
+      >
         <Image
           // src={Constants.CODEMASTERS_LOGO}
-          src={window.location.origin + '/codemasters_logo.png'}
+          src={window.location.origin + '/zeyslogo.png'}
           alignSelf="center"
-          width="290px"
-          height="32px"
+          width="305px"
+          height="90px"
         />
-        <Text alignSelf="center" mt="25px" fontSize="20px" fontWeight="800">
-          SIGN IN
-        </Text>
         <Text
           alignSelf="center"
+          mt="25px"
           fontSize="20px"
-          fontWeight="500"
-          color="#667085"
+          fontWeight="800"
+          color="white"
         >
-          Enter your credentials to access your token
+          SIGN IN
+        </Text>
+        <Text alignSelf="center" fontSize="20px" fontWeight="500" color="white">
+          Enter your credentials to login
         </Text>
         <Box mt="40px" />
         <Flex direction="column" gap="16px">
@@ -63,14 +67,14 @@ const SignIn = () => {
             name="email"
             value={form.email}
             onChange={handleChange}
-            label="email"
+            label="Email"
             placeholder="Enter your Email"
           />
           <FormInput
             name="password"
             value={form.password}
             onChange={handleChange}
-            label="password"
+            label="Password"
             type="password"
             placeholder="Enter your password"
           />
@@ -80,12 +84,12 @@ const SignIn = () => {
           text="Submit"
           isLoading={isLoading}
           onClick={handleSubmit}
-          isBggradient
+          bgColor="#0066FF"
         />
         <Center mt="40px">
           <Stack direction="row" spacing="3px">
-            <Text>Forgot your password? </Text>
-            <Text color="#F94449">Reset Password</Text>
+            <Text color="white">Forgot your password? </Text>
+            <Text color="#0066FF">Reset Password</Text>
           </Stack>
         </Center>
       </Card>

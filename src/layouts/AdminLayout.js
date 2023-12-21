@@ -12,7 +12,7 @@ import Sidebar from './Sidebar';
 const AdminLayout = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.100')}>
+    <Box minH="100vh" bg={'#1B1B1B'}>
       <Sidebar
         onClose={() => onClose}
         s
@@ -35,7 +35,7 @@ const AdminLayout = () => {
         minH="90vh"
         ml={{ base: 0, md: 60 }}
         p="4"
-        bg={useColorModeValue('white', 'white')}
+        bg={useColorModeValue('#1B1B1B', '#1B1B1B')}
       >
         <Outlet />
       </Box>

@@ -10,9 +10,13 @@ const FormInput = ({
   type,
   readOnly,
 }) => {
+  const hasValue = value && value.trim() !== '';
+
   return (
     <Box>
-      <Text mb="6px">{label}</Text>
+      <Text mb="6px" color={hasValue ? '#0066FF' : 'white'}>
+        {label}
+      </Text>
       <Input
         placeholder={placeholder}
         name={name}
@@ -22,6 +26,7 @@ const FormInput = ({
         isDisabled={readOnly}
         size={size}
         type={type}
+        color={hasValue ? '#0066FF' : 'white'} // Set the input text color based on input value
       />
     </Box>
   );

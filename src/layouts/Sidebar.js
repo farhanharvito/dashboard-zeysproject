@@ -13,16 +13,16 @@ import {
 } from '@chakra-ui/react';
 import { FiHome, FiUsers } from 'react-icons/fi';
 import { VscNote, VscSettings } from 'react-icons/vsc';
-import { BiBook, BiDollar, BiLogOut } from 'react-icons/bi';
+import { FaRegCalendarAlt } from 'react-icons/fa';
+import { BiBook, BiDollar, BiLogOut, BiListCheck } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, pathname: '/admin/dashboard' },
-  { name: 'Course', icon: BiBook, pathname: '/admin/course' },
-  { name: 'Students', icon: FiUsers, pathname: '/admin/students' },
-  { name: 'Payment', icon: BiDollar, pathname: '/admin/payment' },
-  { name: 'Report', icon: VscNote, pathname: '/admin/report' },
-  { name: 'Settings', icon: VscSettings, pathname: '/admin/settings' },
+  { name: 'Products', icon: BiBook, pathname: '/admin/product' },
+  { name: 'User Admin', icon: FiUsers, pathname: '/admin/user' },
+  { name: 'Category', icon: BiListCheck, pathname: '/admin/category' },
+  { name: 'Campaign', icon: FaRegCalendarAlt, pathname: '/admin/campaign' },
 ];
 
 const NavItem = ({ icon, children, pathname, ...rest }) => {
@@ -48,11 +48,11 @@ const NavItem = ({ icon, children, pathname, ...rest }) => {
         cursor="pointer"
         color={isActive ? 'white' : 'gray.500'}
         bgGradient={
-          isActive ? 'linear(to-r, #F94449 37.55%, #A62D31 184.78%)' : ''
+          isActive ? 'linear(to-r, #0066FF 37.55%, #0066FF 184.78%)' : ''
         }
         fontSize="14"
         _hover={{
-          bgGradient: 'linear(to-r, #F94449 37.55%, #A62D31 184.78%)',
+          bgGradient: 'linear(to-r, #0066FF 37.55%, #0066FF 184.78%)',
           color: 'white',
         }}
         {...rest}
@@ -60,7 +60,8 @@ const NavItem = ({ icon, children, pathname, ...rest }) => {
         {icon && (
           <Icon
             mr="4"
-            fontSize="14"
+            fontSize="20px"
+            color={isActive ? 'white' : '#0066FF'}
             _groupHover={{
               color: 'white',
             }}
@@ -77,20 +78,20 @@ const Sidebar = ({ onClose, ...rest }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/');
+    navigate('/login');
   };
 
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue('gray.100', 'gray.100')}
+      bg={'#2B2B2B'}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
       h="full"
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Image src={window.location.origin + '/codemasters_logo.png'} />
+        <Image src={window.location.origin + '/zeyslogo_dashboard.png'} />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       <Box mb="40px">
@@ -98,7 +99,9 @@ const Sidebar = ({ onClose, ...rest }) => {
           <Image src={window.location.origin + '/avatar.png'} />
         </Center>
         <Center>
-          <Text fontSize="md">Amanda Santini</Text>
+          <Text fontSize="md" color={'white'}>
+            Lutfi Elyas
+          </Text>
         </Center>
         <Center>
           <Text fontSize="sm" color="gray.500">
@@ -119,7 +122,7 @@ const Sidebar = ({ onClose, ...rest }) => {
           mt="40px"
           size="sm"
           variant="ghost"
-          rightIcon={<BiLogOut />}
+          rightIcon={<BiLogOut color="#0066FF" size={20} />}
           onClick={handleLogout}
         >
           Logout

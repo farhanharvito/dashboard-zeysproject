@@ -3,24 +3,22 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import FormInput from '../../../components/FormInput';
 import Modal from '../../../components/Modal';
-import { useStudent } from '../../../services';
+import { useProduct } from '../../../services';
 import { useCustomToast } from '../../../utils';
 import { Form } from 'react-router-dom';
 
 const initialState = {
   name: '',
-  email: '',
-  phoneNumber: '',
-  enrollNumber: '',
-  admissionDate: '',
+  product_category: '',
+  price: '',
+  stock: '',
 };
 
-const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
+const ModalFormProduct = ({ data, onClose, isOpen, refresh }) => {
   const { showToastError, showToastSuccess } = useCustomToast();
-  const { addStudent, updateStudent } = useStudent();
+  const { addProduct, updateProduct } = useProduct();
   const [form, setForm] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     if (data) {
@@ -31,25 +29,17 @@ const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
   }, [isOpen]);
 
   const handleChange = e => {
-    if (e.target.name === 'image') {
-      setForm({
-        ...form,
-        image: e.target.files[0],
-      });
-    } else {
-      setForm({
-        ...form,
-        [e.target.name]: e.target.value,
-      });
-    }
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleAdd = async () => {
     setIsLoading(true);
     try {
-      const res = await addStudent({
+      const res = await addProduct({
         ...form,
-        admissionDate: dayjs(form.admissionDate).format('YYYY-MM-DD'),
       });
       showToastSuccess(res?.message);
       onClose();
@@ -63,9 +53,8 @@ const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
   const handleUpdate = async () => {
     setIsLoading(true);
     try {
-      const res = await updateStudent(data?.id, {
+      const res = await updateProduct(data?.id, {
         ...form,
-        admissionDate: dayjs(form.admissionDate).format('YYYY-MM-DD'),
       });
       showToastSuccess(res?.message);
       onClose();
@@ -91,47 +80,32 @@ const ModalFormStudent = ({ data, onClose, isOpen, refresh }) => {
           value={form.name}
           onChange={handleChange}
           label="Name"
-          placeholder="Karthi"
+          placeholder="Produk A"
         />
         <FormInput
-          name="email"
-          value={form.email}
+          name="product_category"
+          value={form.product_category}
           onChange={handleChange}
-          label="Email"
-          placeholder="karthi@gmail.com"
+          label="Product Categroy"
+          placeholder="1"
         />
         <FormInput
-          name="phoneNumber"
-          value={form.phoneNumber}
+          name="price"
+          value={form.price}
           onChange={handleChange}
-          label="Phone"
-          placeholder="08xx"
+          label="Price per Piece"
+          placeholder="150000"
         />
         <FormInput
-          name="enrollNumber"
-          value={form.enrollNumber}
-          readOnly
+          name="stock"
+          value={form.stock}
           onChange={handleChange}
-          label="Enroll Number"
-          placeholder="1234567"
-        />
-        <FormInput
-          type="date"
-          name="admissionDate"
-          value={form.admissionDate}
-          onChange={handleChange}
-          label="Date of Admission"
-          placeholder="23-Dec, 2023"
-        />
-        <FormInput
-          type="file"
-          name={'image'}
-          value={handleChange}
-          acccept={'image/*'}
+          label="Stock"
+          placeholder="1"
         />
       </Flex>
     </Modal>
   );
 };
 
-export default ModalFormStudent;
+export default ModalFormProduct;
