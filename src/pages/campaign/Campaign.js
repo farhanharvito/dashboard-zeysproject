@@ -114,7 +114,15 @@ const Campaign = () => {
                     {formattedDate}
                   </Td>
                   <Td fontSize="14px" color="gray.900">
-                    {item?.status}
+                    <Flex alignItems="center">
+                      <Box
+                        border="1px solid gray"
+                        padding="4px"
+                        borderRadius="5px"
+                      >
+                        {item?.status}
+                      </Box>
+                    </Flex>
                   </Td>
                   <Td>
                     <Flex gap="10px">
