@@ -84,7 +84,7 @@ const Campaign = () => {
             Campaign List
           </Text>
           <Button
-            text="ADD NEW CATEGORY"
+            text="ADD NEW CAMPAIGN"
             isBggradient
             onClick={() => setShowFormPopup(true)}
           />
