@@ -109,6 +109,7 @@ const Category = () => {
         <Table variant="simple">
           <Thead>
             <Tr>
+              <Th color={'white'}>ID</Th>
               <Th color={'white'}>Category Name</Th>
               <Th color={'white'}>Total Product</Th>
               <Th></Th>
@@ -118,6 +119,9 @@ const Category = () => {
             {data.map(item => {
               return (
                 <Tr bgColor="gray.50" key={`payment-item-${item.id}`}>
+                  <Td fontSize="14px" color="black">
+                    {item?.id}
+                  </Td>
                   <Td fontSize="14px" color="black">
                     {item?.name}
                   </Td>
