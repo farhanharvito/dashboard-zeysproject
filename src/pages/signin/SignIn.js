@@ -38,7 +38,7 @@ const SignIn = () => {
         minH="516px"
         margin="auto"
         padding="40px"
-        bgColor={'#1B1B1B'}
+        bgColor={'white'}
         border="1px"
         borderColor={'white'}
       >
@@ -54,11 +54,16 @@ const SignIn = () => {
           mt="25px"
           fontSize="20px"
           fontWeight="800"
-          color="white"
+          color="#1B1B1B"
         >
           SIGN IN
         </Text>
-        <Text alignSelf="center" fontSize="20px" fontWeight="500" color="white">
+        <Text
+          alignSelf="center"
+          fontSize="20px"
+          fontWeight="500"
+          color="#1B1B1B"
+        >
           Enter your credentials to login
         </Text>
         <Box mt="40px" />
@@ -88,7 +93,7 @@ const SignIn = () => {
         />
         <Center mt="40px">
           <Stack direction="row" spacing="3px">
-            <Text color="white">Forgot your password? </Text>
+            <Text color="#1B1B1B">Forgot your password? </Text>
             <Text color="#0066FF">Reset Password</Text>
           </Stack>
         </Center>

@@ -110,11 +110,12 @@ const Product = () => {
                     {item?.category.name}
                   </Td>
                   <Td fontSize="14px" color="gray.900">
-                    {priceFormatter(item?.price)}
-                  </Td>
-                  <Td fontSize="14px" color="gray.900">
                     {item?.stock}
                   </Td>
+                  <Td fontSize="14px" color="gray.900">
+                    {priceFormatter(item?.price)}
+                  </Td>
+
                   <Td>
                     <Flex gap="10px">
                       <IconButton
